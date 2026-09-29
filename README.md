@@ -32,3 +32,10 @@ The main trade-off is numerical stability and efficiency. Each query point requi
 The package exports a single function:
 
 - `interpolate(x, y, x_query)`
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
